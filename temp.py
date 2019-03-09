@@ -1,11 +1,13 @@
-def solution(n):
-    answer = ''
-    arr = ['4','1','2']
-    while n > 0:
-        x = n % 3
-        n = n // 3
-        if x == 0:
-            n -= 1
-        answer += arr[x]
-    return answer[::-1]
-print(solution(5))
+def solution(citations):
+    answer = 0
+    count = max(citations)
+    for i in range(max(citations), 0, -1)
+        for j in citations:
+            if j >= count:
+                answer += 1
+            if count == answer:
+            return answer
+        else:
+            count -= 1
+            answer = 0
+# 테스트 16 실패(시간초과)
