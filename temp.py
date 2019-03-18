@@ -1,8 +1,4 @@
-def solution(strings, n):
-    answer = []
-    for i in range(len(strings)):
-        strings[i] = strings[i][n] + strings[i]
-    strings = sorted(strings)
-    for i in strings:
-        answer.append(i[1:])
-    return answer
+def solution(s):
+    if s.isdigit() and len(s) == 4 or len(s) == 6:
+        return True
+    return False
