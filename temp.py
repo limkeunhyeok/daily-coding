@@ -1,4 +1,11 @@
 def solution(s):
-    if s.isdigit() and len(s) == 4 or len(s) == 6:
-        return True
-    return False
+    answer = ''
+    count = 1
+    for i in range(len(s)):
+        if s[i] != ' ' and count % 2 == 1:
+            answer += s[i].upper()
+            count += 1
+        else:
+            answer += s[i].lower()
+            count = 1
+    return answer
