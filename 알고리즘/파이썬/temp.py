@@ -21,3 +21,5 @@ def solution(numbers):
                 answer.append(int(j))
     answer = list(set(answer))
     return len(answer)
+
+print("test git")
