@@ -1,27 +1,35 @@
-def solution(record):
+def solution(N, stages):
+    user = len(stages) # 총 도전자 수
+    fail = [] # 실패율
     answer = []
-    commands = []
-    user_key = {} 
     
-    # user_id와 nick 매핑
-    for i in range(len(record)):
-        commandline = record[i].split(' ')
-        commands.append(commandline[0] + ' ' + commandline[1])
-        if commandline[0] == "Leave":
+    # 실패율 체크
+    for i in range(N):
+        user_stage = 0 # 클리어하지 못한 도전자 수
+        for j in range(len(stages)):
+            if stages[j] == i + 1:
+                user_stage += 1
+        if user == 0:
+            fail.append(0)
             continue
-        else:
-            user_key[commandline[1]] = commandline[2]
-    
-    # 메시지 출력        
-    for i in range(len(commands)):
-        command = commands[i].split(' ')
-        if command[0] == 'Enter':
-            answer.append('%s님이 들어왔습니다.' % user_key[command[1]])
-        elif command[0] == 'Leave':
-            answer.append('%s님이 나가셨습니다.' % user_key[command[1]])
-        else:
-            continue
-    return answer
+        fail.append(user_stage / user)
+        user -= user_stage
 
-record = ["Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234 Prodo","Change uid4567 Ryan"]
-print(solution(record))
+    # 스테이지와 실패율 매핑
+    dict = {}
+    for i in range(len(fail)):
+        dict[i+1] = fail[i]
+    
+   # 스테이지 내림차순
+    while N != len(answer):
+        temp = 0
+        keys = list(dict.keys())
+        for i in keys:
+            if dict[i] > temp:
+               temp = dict[i]
+        for i in keys:
+            if dict[i] == temp:
+                answer.append(i)
+                del dict[i]
+                break
+    return answer
