@@ -1,36 +1,82 @@
-# 다른 사람 풀이 참고함
-def solution(food_times, k):
-    # 같은 사이즈의 음식끼리 묶기
-    length = len(food_times)
-    cnt = 0
-    food_size = {}
-    for index, time in enumerate(food_times):
-        if time in food_size:
-            food_size[time].append(index)
+# https://geonlee.tistory.com/71 참고
+
+import functools
+# 재귀함수 깊이 제한을 바꿈
+import sys
+sys.setrecursionlimit(10**6)
+
+res_preorder = []
+res_postorder = []
+# 트리 노드의 구성
+class Tree:
+    def __init__(self):
+        self.left = None
+        self.right = None
+        self.data = None
+
+# 전위 순회, C->L->R
+def preorder(node):
+    res_preorder.append(node.data[2])
+    if node.left != None:
+        preorder(node.left)
+    if node.right != None:
+        preorder(node.right)
+
+# 후위 순회, L->R->C
+def postorder(node):
+    if node.left != None:
+        postorder(node.left)
+    if node.right != None:
+        postorder(node.right)
+    res_postorder.append(node.data[2])
+    
+# x축과 y축 구분하여 정렬
+def compare(info1,info2):
+    # y축 먼저 비교
+    if info1[1] != info2[1]:
+        return info2[1] - info1[1]
+    # 같은 레벨이라면 x축 비교
+    else:
+        return info1[0] - info2[0]
+
+def solution(nodeinfo):
+    answer = []
+    nodeinfo = [i + [idx+1] for idx, i in enumerate(nodeinfo)] # 노드 번호 매기기
+    nodeinfo = sorted(nodeinfo, key=functools.cmp_to_key(compare)) # 레벨순 노드 정렬
+    root = None
+    
+    # 트리 구성하기
+    for node in nodeinfo:
+        # root에 첫번째 노드 삽입
+        if not root:
+            root = Tree()
+            root.data = node
+        # 2번째 노드 부터
         else:
-            food_size[time] = [index]
-            
-    # 오름차순으로 나타내어 k에서 n바퀴씩 빼기
-    for time in sorted(food_size):
-        if k - (length*(time-cnt)) >= 0:
-            k -= length*(time-cnt)
-            length -= len(food_size[time])
-            cnt += time - cnt
-            
-        # k를 남은 음식의 갯수로 나눈 나머지만큼 이동하여 결과를 반환
-        else:
-            k %= length 
-            
-            # n바퀴씩 돌고난 후, 첫번째 인덱스
-            for find in food_size:
-                if find >= time:
-                    index = food_size[find][0]
-                    break
-            
-            # 남은 음식들만 순환
-            for i in range(index, len(food_times)):
-                if food_times[i] >= time:
-                    if k == 0:
-                        return i+1
-                    k -= 1
-    return -1 # 더 섭취할 음식이 없을 경우
+            x_node = node[0]
+            Node = root
+            # x좌표를 통해 left, right를 구분 
+            while True:
+                if x_node < Node.data[0]:
+                    if Node.left != None:
+                        Node = Node.left
+                        continue
+                    else:
+                        Node.left = Tree()
+                        Node.left.data = node
+                        break
+                if x_node > Node.data[0]:
+                    if Node.right != None:
+                        Node = Node.right
+                        continue
+                    else:
+                        Node.right = Tree()
+                        Node.right.data = node
+                        break
+                break
+    
+    preorder(root)
+    postorder(root)
+    answer.append(res_preorder)
+    answer.append(res_postorder)
+    return answer
