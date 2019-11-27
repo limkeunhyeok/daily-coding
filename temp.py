@@ -1,16 +1,17 @@
-import math
-
-def solution(brown, red):
-    answer = []
-    carpetArea = brown + red
-    maximum = int(math.sqrt(carpetArea))
-
-    # 빨간색 격자의 수는 (row - 2) * (col - 2)    
-    for col in range(3, maximum + 1):
-        if carpetArea % col == 0:
-            row = int(carpetArea / col)
-            if (row - 2) * (col - 2) == red:
-                answer.append(row)
-                answer.append(col)
-                break
-    return answer
+def solution(board):
+    check = 0
+    for i in range(len(board)):
+        check += sum(board[i])
+    if check == 0:
+        return 0
+    elif check == 1:
+        return 1
+    else:
+        temp = board
+        max_length = 0
+        for i in range(1, len(board)):
+            for j in range(len(1, board[i])):
+                if temp[i][j]:
+                    temp[i][j] += min(temp[i - 1][j], temp[i][j - 1], temp[i - 1][j - 1])
+                    max_length = max(max_length, temp[i][j])
+        return max_length ** 2
