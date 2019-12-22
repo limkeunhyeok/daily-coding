@@ -1,25 +1,10 @@
-def solution(n, t, m, p):
-    temp = ''
-    answer = ''
-    num = 0
-    while True:
-        if len(temp) >= t * m:
-            break
-        else:
-            temp += convert(num, n)
-            num += 1
-    
-    p -= 1
-    while len(answer) != t:
-        answer += temp[p]
-        p += 2
+def solution(n, arr1, arr2):
+    answer = []
+    for i in range(n):
+        temp = format((arr1[i] | arr2[i]), 'b')
+        temp = temp.replace('1', '#').replace('0',' ')
+        if len(temp) != n:
+            space = (n - len(temp)) * ' '
+            temp = space + temp
+        answer.append(temp)
     return answer
-
-# 2~16진수 변환
-def convert(n, base):
-    T = "0123456789ABCDEF"
-    q, r = divmod(n, base)
-    if q == 0:
-        return T[r]
-    else:
-        return convert(q, base) + T[r]
