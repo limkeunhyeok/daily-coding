@@ -1,14 +1,11 @@
-def solution(s):
-    temp = []
-    index = 0
-    while index != len(s):
-        temp.append(s[index])
-        index += 1
-        if len(temp) > 1:
-            if temp[-1] == temp[-2]:
-                temp.pop()
-                temp.pop()
-    if len(temp) == 0:
-        return 1
-    else:
-        return 0
+def solution(clothes):
+    answer = 1
+    dict = {}
+    for i in range(len(clothes)):
+        if clothes[i][1] not in dict:
+            dict[clothes[i][1]] = [clothes[i][0]]
+        else:
+            dict[clothes[i][1]].append(clothes[i][0])
+    for key in dict.keys():
+        answer *= (len(dict[key]) + 1)
+    return answer - 1
