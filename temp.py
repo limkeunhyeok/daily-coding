@@ -1,11 +1,25 @@
-def solution(clothes):
-    answer = 1
-    dict = {}
-    for i in range(len(clothes)):
-        if clothes[i][1] not in dict:
-            dict[clothes[i][1]] = [clothes[i][0]]
+def solution(n, t, m, p):
+    temp = ''
+    answer = ''
+    num = 0
+    while True:
+        if len(temp) >= t * m:
+            break
         else:
-            dict[clothes[i][1]].append(clothes[i][0])
-    for key in dict.keys():
-        answer *= (len(dict[key]) + 1)
-    return answer - 1
+            temp += convert(num, n)
+            num += 1
+    
+    p -= 1
+    while len(answer) != t:
+        answer += temp[p]
+        p += 2
+    return answer
+
+# 2~16진수 변환
+def convert(n, base):
+    T = "0123456789ABCDEF"
+    q, r = divmod(n, base)
+    if q == 0:
+        return T[r]
+    else:
+        return convert(q, base) + T[r]
