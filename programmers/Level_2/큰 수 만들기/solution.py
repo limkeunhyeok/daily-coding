@@ -10,7 +10,6 @@ def solution(number, k):
                     m = index - 1
                 break
         else:
-            print(number)
             number = number[:length - k + count]
             break
     return "".join([str(i) for i in number])
