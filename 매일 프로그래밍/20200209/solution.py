@@ -1,3 +1,5 @@
+# 주어진 string 에 모든 단어를 거꾸로 하시오.
+
 def solution(s):
     answer = ''
     words = s.split(' ')
