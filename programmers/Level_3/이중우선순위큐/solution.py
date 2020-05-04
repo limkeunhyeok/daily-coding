@@ -2,8 +2,6 @@ import heapq
 
 def solution(operations):
     answer = []
-    num = []
-    op = []
     
     for text in operations:
         command = text.split(' ')
