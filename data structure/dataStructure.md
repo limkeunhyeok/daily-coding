@@ -398,5 +398,135 @@ class MaxHeap:
 ## 우선순위 큐(priority Queue)
 
 - 우선순위에 따라 데이터를 처리하는 자료구조
+- 보통 힙을 이용하여 구현한다
 
 ### 우선순위 큐 ADT
+
+- queue: 데이터를 저장할 리스트
+- 메소드:
+  - enqueue(rank, data): rank(우선순위)와 데이터를 삽입한다
+  - dequeue(): 우선순위에 따라 데이터를 반환한다
+  - show(): queue에 저장된 데이터를 출력한다
+
+```python
+from heapq import heappush, heappop
+
+class PriorityQueue:
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, rank, data):
+        heappush(self.queue, (rank, data))
+
+    def dequeue(self):
+        if not self.queue:
+            return 'empty'
+        return heappop(self.queue)
+
+    def show(self):
+        print(self.queue)
+```
+
+## 해쉬 테이블(Hash Table)
+
+![해쉬](./img/hashTable.PNG)
+
+- 키에 데이터를 저장하는 자료구조
+- 용어
+  - 해쉬(Hash): 임의 값을 고정 길이로 변환하는 것
+  - 해쉬 테이블(Hash Table): 키 값의 연산에 의해 직접 접근이 가능한 데이터 구조
+  - 해싱 함수(Hashing Function): 키에 대해 산술 연산을 이용해 데이터 위치를 찾을 수 있는 함수
+
+### 해쉬 테이블 ADT
+
+- table: 데이터를 저장할 리스트
+- 메소드:
+  - hash_funtion(key): 간단하게 key 값을 아스키코드로 변환한다
+  - put(key, data): key 값에 data를 저장한다
+  - find(key): 해당 key 값의 data를 반환한다
+
+```python
+class HashTable:
+    def __init__(self):
+        self.table = [None for i in range(139)]
+
+    def hash_function(self, key):
+        return ord(key)
+
+    def put(self, key, data):
+        self.table[self.hash_function(key)] = data
+
+    def find(self, key):
+        return self.table[self.hash_function(key)]
+```
+
+## 그래프(Graph)
+
+![그래프](./img/graph.PNG)
+
+- 그래프는 정점(Vertex)과 간선(Edge)로 구성된 자료구조
+
+### 그래프 탐색
+
+- 그래프 탐색은 하나의 정점에서 시작하여 모든 정점을 한 번씩 방문하는 것
+- 그래프에서 탐색은 어떤 노드에 방문했는지의 여부를 반드시 검사해야 한다
+- 깊이 우선 탐색(Depth First Search)
+  - 루트 노드(혹은 다른 임의의 노드)에서 시작해서 다음 분기(branch)로 넘어가기 전에 해당 분기를 완벽하게 탐색하는 방법
+- 너비 우선 탐색(Breadth First Search)
+  - 루트 노드(혹은 다른 임의의 노드)에서 시작해서 인접한 노드를 먼저 탐색하는 방법
+
+### 그래프 ADT
+
+- graph: 한 노드에서 다른 노드로 갈 수 있는 경로를 저장하며, 딕셔너리와 집합 자료형으로 구현
+- 메소드:
+  - addEdge(v, w): v와 w를 연결하는 간선을 그래프에 추가한다
+  - show(): 각 정점별 간선 정보를 출력한다
+  - dfs(start): start부터 dfs 방식으로 모든 노드를 탐색하여 출력한다
+  - bfs(start): start부터 bfs 방식으로 모든 노드를 탐색하여 출력한다
+
+```python
+class Graph:
+    def __init__(self):
+        self.graph = {}
+
+    def addEdge(self, v, w):
+        if v not in self.graph:
+            self.graph[v] = {w}
+        else:
+            self.graph[v].add(w)
+            set(self.graph[v])
+
+        if w not in self.graph:
+            self.graph[w] = {v}
+        else:
+            self.graph[w].add(v)
+            set(self.graph[w])
+
+    def show(self):
+        for i in self.graph:
+            print(i, '->', self.graph[i])
+
+    def dfs(self, start):
+        stack = [start]
+        marked = [start]
+        while stack:
+            v = stack.pop()
+            print(v, end = ' ')
+            for w in self.graph[v]:
+                if w not in marked:
+                    stack.append(w)
+                    marked.append(w)
+        print()
+
+    def bfs(self, start):
+        queue = [start]
+        marked = [start]
+        while queue:
+            v = queue.pop(0)
+            print(v, end = ' ')
+            for w in self.graph[v]:
+                if w not in marked:
+                    queue.append(w)
+                    marked.append(w)
+        print()
+```
