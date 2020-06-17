@@ -20,16 +20,7 @@ def comb2(arr, k):
             for j in comb2(arr[i + 1:len(arr)], k - 1):
                 yield arr[i] + j
 
-def comb3(arr, k):
-    for i in range(len(arr)):
-        if k == 1:
-            return arr[i]
-        else:
-            for j in comb2(arr[i + 1:len(arr)], k - 1):
-                return arr[i] + j
 
 
 print(comb1([1, 2, 3, 4, 5], 3))
 print(list(comb2(['1', '2', '3', '4', '5'], 3)))
-
-print(comb3(['a', 'b', 'c'], 2))

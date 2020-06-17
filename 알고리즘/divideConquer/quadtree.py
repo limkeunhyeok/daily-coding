@@ -1,7 +1,3 @@
-"""
-출처: 알고스팟(https://www.algospot.com/judge/problem/read/QUADTREE)
-"""
-
 def solution(tree):
     return reverse(iter(tree))
 
