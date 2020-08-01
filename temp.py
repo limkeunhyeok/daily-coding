@@ -1,6 +1,2 @@
-def solution(n, times):
-    answer = []
-    count = 1
-    while count != n:
-        
-    return answer[-1]
+def solution(teams):
+    return sum([i for i in range(teams)])
