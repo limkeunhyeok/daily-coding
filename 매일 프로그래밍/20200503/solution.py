@@ -1,3 +1,5 @@
+# 2차 정수 배열(2D int array)가 주어지면, 소용돌이 모양으로 원소들을 프린트하시오.
+
 def solution(arr):
     answer = ''
     rowIndex, colIndex = 0, 0
