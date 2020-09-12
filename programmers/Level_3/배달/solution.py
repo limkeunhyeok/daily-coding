@@ -44,4 +44,4 @@ def solution(N, road, K):
     for key in dist.keys():
         if dist[key] <= K:
             answer += 1
-    return answer
+    return dist
