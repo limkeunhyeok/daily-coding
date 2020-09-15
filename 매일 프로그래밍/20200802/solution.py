@@ -2,7 +2,7 @@ from collections import defaultdict
 
 class Node:
     def __init__(self, data):
-        self.data = data;
+        self.data = data
         self.left = None
         self.right = None
         self.level = 1
