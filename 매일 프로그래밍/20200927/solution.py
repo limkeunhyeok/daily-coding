@@ -16,7 +16,7 @@ def solution(n):
         return '11'
     
     answer = '11'
-    for i in range(3, n + 1):
+    for _ in range(3, n + 1):
         answer += '$'
         l = len(answer)
         cnt = 1
