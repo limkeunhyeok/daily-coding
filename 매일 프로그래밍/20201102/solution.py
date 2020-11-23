@@ -1,3 +1,5 @@
+# 양수 K가 주어지면 K 길이의 이진법 숫자를 모두 프린트하시오. 단, 연속으로 1이 있으면 안됩니다.
+
 def solution(n):
     maxValue = 2 ** n
     answer = []

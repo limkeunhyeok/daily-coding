@@ -1,3 +1,5 @@
+# 이진트리안에 모든 단말노드(leaf node)의 갯수를 구하시오.
+
 class Node:
     def __init__(self, data):
         self.data = data

@@ -1,3 +1,5 @@
+# 정렬된 정수 배열이 주어지면, 발란스된 이진탐색트리로 바꾸시오.
+
 class Node:
     def __init__(self, data):
         self.data = data
