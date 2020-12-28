@@ -5,7 +5,7 @@ class Node:
         self.prev = None
 
 class DoubleLinkedList:
-     def __init__(self):
+    def __init__(self):
         self.head = None
     
     def insert(self, data):
