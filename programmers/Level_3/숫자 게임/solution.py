@@ -6,7 +6,7 @@ def solution(A, B):
         data = A[0]
         if data >= B[0]:
             A.pop(0)
-        else:
+        else:g
             answer += 1
             A.pop(0)
             B.pop(0)
