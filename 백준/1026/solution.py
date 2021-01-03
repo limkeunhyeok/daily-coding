@@ -6,7 +6,7 @@ b = list(map(int, input().split(' ')))
 a = sorted(a)
 b = sorted(b, reverse=True)
 
-answer = 1
+answer = 0
 for i in range(n):
     answer += a[i] * b[i]
 print(answer)
