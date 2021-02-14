@@ -10,7 +10,7 @@ class temp(unittest.TestCase):
         result = solution.solution(["ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"], [2,3,5])
         self.assertEqual(result, ["ACD", "AD", "ADE", "CD", "XYZ"])
 
-    def test_case_2(self):
+    def test_case_3(self):
         result = solution.solution(["XYZ", "XWY", "WXA"], [2,3,4])
         self.assertEqual(result, ["WX", "XY"])
 
